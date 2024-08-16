@@ -1,6 +1,6 @@
 #library(vegan)
 library(dplyr)
-source("R_scripts/library.R")
+source("library/library.R")
 
 #read the data
 asv_tab = read.csv("data/asv_tab.csv", row.names = 1)

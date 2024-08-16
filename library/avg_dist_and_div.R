@@ -1,6 +1,6 @@
 library(vegan)
 library(dplyr)
-source("R_scripts/library.R")
+source("library/library.R")
 
 rarefactions_list = readRDS("data/rarefactions.rds")
 
