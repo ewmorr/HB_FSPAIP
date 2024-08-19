@@ -1,5 +1,5 @@
 #library(vegan)
-library(dplyr)
+#library(dplyr)
 source("library/library.R")
 
 #read the data
@@ -9,7 +9,7 @@ nrow(asv_tab)
 colnames(asv_tab)
 rownames(asv_tab)
 
-rowSums(asv_tab) %>% sort
+sort(rowSums(asv_tab))
 #how much greater is max sample size than min
 max(rowSums(asv_tab))/min(rowSums(asv_tab)) 
 #297
@@ -18,7 +18,6 @@ max(rowSums(asv_tab))/min(rowSums(asv_tab))
 # plus bitbucket recommended max repo size is 2 G
 
 min_seqs = min(rowSums(asv_tab)) 
-#perform rarefaction on vol and wash tables
 rarefactions_list = multiple_subsamples(x = asv_tab, depth = min_seqs, iterations = 1000) 
 
 saveRDS(rarefactions_list, "data/rarefactions.rds")

@@ -8,16 +8,17 @@ asv_tab = read.table("data/ASVs_counts.tsv", header = T)
 asv_tab$ASV = rownames(asv_tab)
 asv_tab.tax = left_join(taxonomy, asv_tab, by = "ASV")
 
-asv_tab.tax.long = asv_tab.tax %>% 
+asv_tab.tax.long = asv_tab.tax %>%
     pivot_longer(
-        names_to = c("sample", "MID"), 
-        names_sep = "_", 
+        names_to = c("sample", "MID"), #if sample names include the Illumina tag ID
+        names_sep = "_", # '_S' and some digits, e.g., sampleName_S01, can include these two lines
         values_to = "seq_count",
         cols = where(is.numeric)
     )
-
-asv_tab.tax.long$sample = sub("X","", asv_tab.tax.long$sample)
 asv_tab.tax.long$MID = NULL
+
+# fix the sample names that begin with digits
+#asv_tab.tax.long$sample = sub("X","", asv_tab.tax.long$sample)
 
 asv_tab.tax.long.taxon_summary = asv_tab.tax.long %>% 
     group_by(sample, Kingdom, Phylum, Class, Order, Family, Genus, Species) %>%

@@ -30,7 +30,7 @@ multiple_subsamples = function(x = NULL, depth = NULL, iterations = NULL){
     for(i in 1:iterations){
         #rrarefy apparently throws a warnings if there are no counts of 1 in the data
         # annoying... but if you get that warning ignore
-        x_subsamples[[i]] = rrarefy(
+        x_subsamples[[i]] = vegan::rrarefy(
             x = x.min,
             sample = depth
         )
@@ -48,7 +48,7 @@ richness_calc = function(x){
 #function to log+1 transform counts before dist
 log_dist = function(x, method = "bray"){
     x_log = log(x+1)
-    vegdist(x_log, method = method, binary = F, diag = T, upper = T)
+    vegan::vegdist(x_log, method = method, binary = F, diag = T, upper = T)
 }
 
 
